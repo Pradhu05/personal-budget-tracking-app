@@ -1,0 +1,72 @@
+<div class="container mt-4 px-3 px-md-5" style="font-family: 'Segoe UI', sans-serif;">
+  <h2 class="text-center mb-4">
+    <i class="bi bi-question-circle-fill text-info"></i> Help - Personal Budget Guide
+  </h2>
+
+  <!-- Introduction -->
+  <section class="mb-4" id="intro">
+    <h4><i class="bi bi-info-circle-fill text-primary"></i> Introduction</h4>
+    <p>
+      Welcome to the <strong>Personal Budget Tracker</strong>! This tool helps you manage your income,
+      track expenses, and stay within your budget for categories like <em>Food, Travel, Shopping</em>, and <em>Jewellery</em>.
+    </p>
+  </section>
+
+  <section class="mb-4" id="howto">
+    <h4><i class="bi bi-gear-fill text-success"></i> How to Use</h4>
+    <ul>
+      <li><strong>Dashboard:</strong> View overall summary with bar and pie charts.</li>
+      <li><strong>Employees:</strong> Add/update income/expenses, view employee history.</li>
+      <li><strong>Budget:</strong> Set and view monthly/weekly budgets by category.</li>
+      <li><strong>Reports:</strong> Visualize income/expenses trends and breakdowns.</li>
+    </ul>
+    <div style="text-align: center;">
+      <img src="assets/dashboard1.png" alt="Dashboard Screenshot" style="max-width: 700px; width: 100%; height: auto; border-radius: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.2); margin-top: 15px;">
+    </div>
+  </section>
+  <section class="mb-4" id="actions">
+    <h4><i class="bi bi-check2-square text-warning"></i> Common Actions</h4>
+    <ul>
+      <li>Add a new income or expense record.</li>
+      <li>Update or delete an existing record.</li>
+      <li>Filter reports by date or category.</li>
+      <li>Set monthly/weekly budget limits by category.</li>
+    </ul>
+    <div class="alert alert-info mt-2">
+      💡 <strong>Tip:</strong> Always check the category before submitting a record to ensure it's budgeted.
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="mb-4" id="faqs">
+    <h4><i class="bi bi-question-circle text-danger"></i> FAQs</h4>
+
+    <p><strong>Q:</strong> Can I edit submitted records?<br>
+       <strong>A:</strong> Yes, go to the Employees tab and click "Update" on the desired entry.</p>
+
+    <p><strong>Q:</strong> How to view category-wise expenses?<br>
+       <strong>A:</strong> Go to the Reports section and select the category.</p>
+
+    <p><strong>Q:</strong> What happens if I exceed my budget?<br>
+       <strong>A:</strong> The app will still allow entries but notify you when you've exceeded your set budget.</p>
+
+    <p><strong>Q:</strong> Can I add past transactions?<br>
+       <strong>A:</strong> Yes, you can manually select any date while adding a new income/expense.</p>
+
+    <p><strong>Q:</strong> Who can see my budget data?<br>
+       <strong>A:</strong> Only you and authorized admins can view or modify your personal budget data.</p>
+
+    <p><strong>Q:</strong> How do I delete a budget?<br>
+       <strong>A:</strong> Go to the Budget section and click the delete button next to the desired category.</p>
+  </section>
+  <section id="support">
+    <h4><i class="bi bi-telephone-fill text-secondary"></i> Contact Support</h4>
+    <p>If you face any issues, contact your admin or reach out to us at:</p>
+    <ul>
+      <li>Email: <a href="mailto:support&#64;Personsalbudget.com">support&#64;Personsalbudget.com</a></li>
+      <li>Phone: +91-98765-43210</li>
+    </ul>
+  </section>
+</div>
+
+<router-outlet></router-outlet>

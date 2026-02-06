@@ -1,0 +1,49 @@
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark shadow-sm py-3">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+      <!-- Sidebar toggle (mobile only) -->
+      <button class="btn btn-outline-light d-md-none" (click)="toggleSidebar()">
+        <i class="bi bi-list fs-4"></i>
+      </button>
+      <i class="bi bi-wallet2 text-warning fs-2"></i>
+      <span class="text-white fw-bold fs-4">Personal Budget</span>
+    </div>
+
+    <div class="d-flex align-items-center gap-4 ms-auto">
+      <a class="text-white d-flex align-items-center gap-2 text-decoration-none fs-5">
+        <img src="assets/female.png" class="avatar-img-navbar" alt="User Avatar" />
+        {{ username }}
+      </a>
+      <button class="btn btn-outline-light" (click)="toggleTheme()">🌓</button>
+      <a class="text-white text-decoration-none fs-5" routerLink="/loginsignup">
+        <i class="bi bi-person-plus-fill fs-4"></i> Sign Up
+      </a>
+      <a (click)="onLogOut()" class="text-white text-decoration-none fs-5">
+        <i class="bi bi-box-arrow-right fs-4"></i> LogOut
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div class="d-flex">
+  <!-- SIDEBAR -->
+  <div
+    class="sidebar"
+    [ngClass]="{ 'show': isSidebarOpen || !isMobileView }"
+  >
+    <ul class="nav flex-column gap-3 sidebar-menu">
+      <li><a routerLink="/dashboard" class="sidebar-item"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+      <li><a routerLink="/employees" class="sidebar-item"><i class="bi bi-people-fill me-2"></i>Employees</a></li>
+      <li><a routerLink="/budget" class="sidebar-item"><i class="bi bi-cash-stack me-2"></i>Budget</a></li>
+      <li><a routerLink="/report" class="sidebar-item"><i class="bi bi-graph-up-arrow me-2"></i>Report</a></li>
+      <li><a routerLink="/help" class="sidebar-item"><i class="bi bi-question-circle me-2"></i>Help</a></li>
+    </ul>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="flex-grow-1 p-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

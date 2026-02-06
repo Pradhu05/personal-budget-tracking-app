@@ -1,0 +1,30 @@
+<div class="card p-4">
+  <h4 class="mb-3">Edit Expense</h4>
+  <form #editForm="ngForm" (ngSubmit)="updateExpense()">
+    
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" name="category"[(ngModel)]="editedExpense.category" style="margin-left: 10px;" required>
+        <option value="" disabled>Select Category</option>
+        <option *ngFor="let cat of categoryList" [value]="cat.category">
+          {{ cat.category }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" class="form-control" id="amount" name="amount" [(ngModel)]="editedExpense.amount" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="expenses_date" class="form-label">Date</label>
+      <input type="date" class="form-control" id="expenses_date"  name="expenses_date" [(ngModel)]="editedExpense.expenses_date" required />
+    </div>
+<div style="margin-top: 10px;">
+  <button class="btn btn-primary" style="margin-right: 10px;">Update</button>
+  <button class="btn btn-secondary">Cancel</button>
+</div>
+  </form>
+</div>

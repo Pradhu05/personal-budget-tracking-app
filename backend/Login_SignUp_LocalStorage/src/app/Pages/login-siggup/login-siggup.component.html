@@ -1,0 +1,37 @@
+<div class="heading">
+  <h2>Login / SignUp</h2>
+</div>
+<div class="loginsignup-container">
+
+  <form *ngIf="activeForm === 'register'" >
+    <h2>REGISTER</h2>
+    <div class="form-group">
+      <input type="text" name="username" [(ngModel)]="registerObj.username" placeholder="Enter username" >
+    </div>
+
+    <div class="form-group">
+      <input type="email" name="email" [(ngModel)]="registerObj.email"  placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" [(ngModel)]="registerObj.password" placeholder="Enter password">
+    </div>
+    <button type="submit" (click)="registerForm()">Register</button>
+    <p (click)="toggleForm('login')">
+      Already have an account? <span class="highlighted">LOGIN</span>
+    </p>
+  </form>
+
+  <form *ngIf="activeForm === 'login'">
+    <h2>LOGIN</h2>
+    <div class="form-group">
+      <input type="email" name="email" [(ngModel)]="loginObj.email" placeholder="Enter email" >
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" [(ngModel)]="loginObj.password" placeholder="Enter password" >
+    </div>
+    <button type="submit" (click)="loginForm()">Login</button>
+    <p (click)="toggleForm('register')">
+      Don't have an account? <span class="highlighted">REGISTER</span>
+    </p>
+  </form>
+</div>

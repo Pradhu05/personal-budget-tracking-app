@@ -1,0 +1,106 @@
+<div class="container mt-4">
+  <div class="row text-center">
+    <div class="col-md-3 mb-4">
+      <div class="card border-success border-2 shadow-sm h-100">
+        <div class="card-body">
+          <i class="bi bi-cash-coin text-success fs-2"></i>
+          <h5 class="card-title mt-2 text-success">Total Income</h5>
+          <p class="card-text h4">{{ income }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+      <div class="card border-danger border-2 shadow-sm h-100">
+        <div class="card-body">
+          <i class="bi bi-credit-card-2-back text-danger fs-2"></i>
+          <h5 class="card-title mt-2 text-danger">Total Expenses</h5>
+          <p class="card-text h4">{{ expenses }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+      <div class="card border-primary border-2 shadow-sm h-100">
+        <div class="card-body">
+          <i class="bi bi-wallet2 text-primary fs-2"></i>
+          <h5 class="card-title mt-2 text-primary">Balance</h5>
+          <p class="card-text h4">{{ balance }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+      <div class="card border-warning border-2 shadow-sm h-100">
+        <div class="card-body">
+          <i class="bi bi-graph-up-arrow text-warning fs-2"></i>
+          <h5 class="card-title mt-2 text-warning">Total Budget</h5>
+          <p class="card-text h4">{{ budget }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-3 mb-4 bg-white rounded w-100">
+        <div class="card-header text-center bg-primary text-white">
+          <h6 class="mb-0">Expense Breakdown by Category</h6>
+        </div>
+        <div class="card-body d-flex justify-content-center">
+          <canvas id="expensePieChart" style="max-width: 300px; max-height: 300px;"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm border-primary mb-4 w-100">
+        <div class="card-header bg-primary text-white text-center">
+          <h6 class="mb-0">Income vs Expense by Category</h6>
+        </div>
+        <div class="card-body d-flex justify-content-center">
+          <canvas id="barChart" style="width: 100%; height: 250px;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <label for="categorySelect" class="form-label">Category</label>
+      <select id="categorySelect" [(ngModel)]="selectedCategory" class="form-select">
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">From Date</label>
+      <input type="date" [(ngModel)]="fromDate" class="form-control" />
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">To Date</label>
+      <input type="date" [(ngModel)]="toDate" class="form-control" />
+    </div>
+
+<!-- Load Button -->
+<div class="col-md-2 d-flex align-items-end">
+  <button class="btn btn-danger fw-semibold shadow-sm px-4 py-2" (click)="loadData()" style="height: 38px;">
+    <i class="bi bi-bar-chart-line-fill me-2"></i>Load Report
+  </button>
+</div>
+
+  <div class="row mt-4">
+    <div class="col">
+      <div class="card shadow-sm border-primary mb-4 w-100">
+        <div class="card-header bg-primary  text-white text-center">
+          Income vs Expense Over Time
+        </div>
+        <div class="card-body">
+          <canvas #reportChart width="400" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>

@@ -1,0 +1,167 @@
+<div style="display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap; padding: 20px;">
+  <div class="form-group">
+    <label for="employee"><strong>Select Employee:</strong></label>
+    <input type="hidden">
+    <select [(ngModel)]="selectedEmployee" (change)="onEmployeeChange()" class="form-control" name="employee">
+      <option value="" disabled selected>-- Select Employee --</option>
+      <option *ngFor="let emp of employees" [value]="emp.id">
+        {{ emp.firstname }} {{ emp.lastname }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="category"><strong>Select Category:</strong></label>
+    <select id="category" [(ngModel)]="selectedCategory" name="category"  (change)="applyFilters()" class="form-control">
+      <option value="" disabled>Select a category</option>
+      <option *ngFor="let category of categoryList" [value]="category.category">
+        {{ category.category }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="dob"><strong>Date of Birth</strong></label>
+    <input type="date" id="dob" class="form-control" [(ngModel)]="dob" name="dob" />
+  </div>
+
+  <div class="form-group">
+    <label for="doj"><strong>Date of Joining</strong></label>
+    <input type="date" id="doj" class="form-control" [(ngModel)]="doj" name="doj" />
+  </div>
+<div class="mb-4 d-flex align-items-center gap-3 flex-wrap" style="margin: 20px;">
+  <button class="btn btn-primary d-flex align-items-center gap-2"
+          style="border: 3px solid #0d6efd; font-weight: bold;"
+          (click)="showAddForm = true">
+    <i class="bi bi-plus-circle"></i> Add Entry
+  </button>
+
+<button class="btn btn-success" 
+        style="border: 3px solid #198754; box-shadow: 1px 1px 6px rgba(0,0,0,0.2);"
+        (click)="exportToExcel()">
+  <i class="bi bi-download"></i> Export to Excel
+</button>
+
+</div>
+
+
+  <div style="    display: flex;
+      flex-direction: revert;
+      gap: 30px;
+      align-items: flex-start;
+      /* flex-wrap: wrap; */
+      padding: 20px;
+      justify-content: space-between;
+      width: 100%;">
+    <div class="col-md-auto">
+      <app-edit-expense *ngIf="editingExpense" [expense]="editingExpense" (updated)="onExpenseUpdated()"></app-edit-expense>
+    </div>
+    <div class="col-md-auto">
+      <div *ngIf="showAddForm" style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; max-width: 600px;">
+
+  <h4>{{ isUpdateMode ? 'Update Expense' : 'Add New Expense' }}</h4>
+  <form (ngSubmit)="submitForm()" #addForm="ngForm">
+        <div class="form-group mb-3">
+          <label for="employee">Select Employee</label>
+          <select id="employee" class="form-control" name="employee_id" required [(ngModel)]="newExpense.employee_id">
+            <option value="" disabled >-- Select Employee --</option>
+            <option *ngFor="let emp of employees" [value]="emp.id">{{ emp.firstname }} {{ emp.lastname }}</option>
+          </select>
+        </div>
+
+    <div class="form-group mb-3">
+      <label for="category">Select Category</label>
+      <select id="category" class="form-control" name="category_id" required [(ngModel)]="newExpense.category">
+        <option value="" disabled >-- Select Category --</option>
+        <option *ngFor="let cat of categoryList" [value]="cat.category">
+          {{ cat.category }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="amount">Amount</label>
+      <input type="number" id="amount" class="form-control" name="amount" required [(ngModel)]="newExpense.amount" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="expenses_date"> Date</label>
+      <input type="date" id="expenses_date" class="form-control" name="expenses_date" required [(ngModel)]="newExpense.expenses_date" />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+      {{ isUpdateMode ? 'Update' : 'Submit' }}
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Cancel</button>
+  </form>
+  </div>
+    </div>
+    <div class="col-md-auto">
+        <div style="display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;">
+    <h5 class="table-heading">Recent Activity</h5>
+    <table class="recent-activity-table">
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Amount (₹)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expenseList">
+          <td>{{ expense.employee }}</td>
+          <td>{{ expense.expenses_date | date:'mediumDate' }}</td>
+          <td>{{ expense.category }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>
+            <button class="btn btn-success" (click)="editExpense(expense)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteExpense(expense.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+    </div>
+</div>
+<style>
+
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15rem;
+  width: 150%;
+}
+
+.table-heading {
+font-weight: bold;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+padding: 1rem;
+font-size: 1.5rem;
+text-align: center;
+}
+
+.recent-activity-table {
+border-collapse: collapse;
+gap: 1rem;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.recent-activity-table thead {
+background-color: #f2f2f2;
+}
+.recent-activity-table th,
+.recent-activity-table td {
+padding: 12px 20px;
+text-align: center;
+border: 3px solid #ddd;
+}
+.recent-activity-table tr:nth-child(even) {
+background-color: #f9f9f9;
+} 
+</style>

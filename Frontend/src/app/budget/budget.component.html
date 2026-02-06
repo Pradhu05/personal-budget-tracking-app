@@ -1,0 +1,148 @@
+<div [class.blurred]="showForm">
+  <div class="container mt-4">
+    <div class="row g-4 text-center">
+      <div class="col-6 col-md-3">
+        <div class="card text-white bg-primary h-100 shadow" role="button" (click)="getCategoryData(1)">
+          <div class="card-body">
+            <i class="bi bi-egg-fried display-5"></i>
+            <h5 class="card-title mt-2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: large;">Food</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-white bg-danger h-100 shadow" role="button" (click)="getCategoryData(2)">
+          <div class="card-body">
+            <i class="bi bi-gem display-5"></i>
+            <h5 class="card-title mt-2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: large;">Jewellery</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-white bg-success h-100 shadow" role="button" (click)="getCategoryData(3)">
+          <div class="card-body">
+            <i class="bi bi-bag-check display-5"></i>
+            <h5 class="card-title mt-2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: large;">Travel</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-white bg-warning h-100 shadow" role="button" (click)=" getCategoryData (4)">
+          <div class="card-body">
+            <i class="bi bi-airplane display-5"></i>
+            <h5 class="card-title mt-2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: large;">Shopping</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div style="margin: 20px; bottom: 40px; right: 40px; text-align: center;">
+      <button class="btn btn-primary" (click)="showForm = true">Add Budget</button>
+    </div>
+
+    <div *ngIf="selectedCategoryData" class="container mt-5">
+      <div class="card shadow border-0">
+        <div class="card-header bg-dark text-white text-center">
+          <h4 class="mb-0">{{ selectedCategoryData?.category }} Summary</h4>
+        </div>
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-md-4 mb-3">
+              <div class="border rounded p-3 bg-light">
+                <h6 class="text-muted fw-bold">Income</h6>
+                <p class="h4 text-success">₹{{ selectedCategoryData?.income }}</p>
+                <button class="btn btn-outline-success mt-2" (click)="fetchIncomeDetails()">💰 Show Income Details</button>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="border rounded p-3 bg-light">
+                <h6 class="text-muted fw-bold">Expenses</h6>
+                <p class="h4 text-danger">₹{{ selectedCategoryData?.expenses }}</p>
+                <button class="btn btn-outline-primary mt-2" (click)="fetchExpensesDetails()">📉 Show Expenses Details</button>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="border rounded p-3 bg-light">
+                <h6 class="text-muted fw-bold">Balance</h6>
+                <p class="h4 text-primary">₹{{ selectedCategoryData?.balance }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-5" style="gap: 20px;">
+      <div *ngIf="showIncomeTable" class="w-50">
+        <h5>Income Details</h5>
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let income of incomeData">
+              <td>{{ income.name }}</td>
+              <td>₹{{ income.amount }}</td>
+              <td>{{ income.date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="showExpensesTable" class="w-50">
+        <h5>Expense Details</h5>
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of expensesData">
+              <td>{{ expense.name }}</td>
+              <td>₹{{ expense.amount }}</td>
+              <td>{{ expense.date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showForm" class="popup-backdrop">
+  <div class="popup-form">
+    <h4>Add New Budget</h4>
+    <form (ngSubmit)="submitBudget()" #budgetForm="ngForm">
+      <div class="form-group mb-3">
+        <label for="employee">Employee</label>
+        <select class="form-control" id="employee" name="employee_id" required [(ngModel)]="newBudget.employee_id">
+          <option value="" disabled>-- Select Employee --</option>
+          <option *ngFor="let emp of employees" [value]="emp.id">
+            {{ emp.firstname }} {{ emp.lastname }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group mb-3">
+        <label for="category">Category</label>
+        <select class="form-control" id="category" name="category_id" required [(ngModel)]="newBudget.category_id">
+          <option value="" disabled>-- Select Category --</option>
+          <option *ngFor="let cat of categoryList" [value]="cat.id">{{ cat.category }}</option>
+        </select>
+      </div>
+      <div class="form-group mb-3">
+        <label for="amount">Amount</label>
+        <input type="number" class="form-control" id="amount" name="amount" required [(ngModel)]="newBudget.amount" />
+      </div>
+      <div class="d-flex justify-content-end gap-2">
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
