@@ -31,9 +31,13 @@ Tools & Platforms
 	Graphical Reports (Charts)
 	Responsive User Interface
 
-<img width="1919" height="900" alt="dashboard1 png" src="https://github.com/user-attachments/assets/1dd54ec2-daae-42d8-bbdc-86759b76aae3" />
-<img width="1919" height="917" alt="Screenshot 2025-06-13 123835" src="https://github.com/user-attachments/assets/b890daa7-c4eb-45aa-b123-aec3b8ce3f26" />
 **System Architecture**
 o	Angular frontend communicates with Django backend via REST APIs
 o	Django processes requests and interacts with the database
 o	JSON responses are sent back to the frontend for display
+
+<img width="1919" height="900" alt="dashboard1 png" src="https://github.com/user-attachments/assets/1dd54ec2-daae-42d8-bbdc-86759b76aae3" />
+DashBoard page
+<img width="1919" height="917" alt="Screenshot 2025-06-13 123835" src="https://github.com/user-attachments/assets/b890daa7-c4eb-45aa-b123-aec3b8ce3f26" />
+<img width="1919" height="911" alt="Screenshot 2025-06-13 123757" src="https://github.com/user-attachments/assets/2ba3760c-ae42-449c-aead-5457f4d7a8b5" />
+Register/Login Page
